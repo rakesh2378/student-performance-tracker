@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <h2 style="margin-top:0">Students</h2>
+    {% if not students %}
+      <p>No students yet. <a href="{{ url_for('add_student') }}">Add your first student</a>.</p>
+    {% else %}
+      <table>
+        <thead><tr><th>Roll #</th><th>Name</th><th>Subjects</th><th>Avg</th><th></th></tr></thead>
+        <tbody>
+          {% for s in students %}
+          <tr>
+            <td>{{ s.roll_number }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.grades|length }}</td>
+            <td>
+              {% if s.grades %}
+                {{ (s.grades.values()|sum / (s.grades|length)) | round(2) }}
+              {% else %}—{% endif %}
+            </td>
+            <td><a class="btn secondary" href="{{ url_for('student_detail', roll_number=s.roll_number) }}">View</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
+{% endblock %}

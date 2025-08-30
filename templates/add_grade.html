@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <h2 style="margin-top:0">Add/Update Grade for {{ student.name }} ({{ student.roll_number }})</h2>
+    <form method="post">
+      <div class="grid grid-2">
+        <div class="field">
+          <label>Subject</label>
+          <input name="subject" placeholder="e.g., Math" required>
+        </div>
+        <div class="field">
+          <label>Score (0-100)</label>
+          <input name="score" type="number" min="0" max="100" step="0.01" required>
+        </div>
+      </div>
+      <button class="btn" type="submit">Save</button>
+      <a class="btn ghost" href="{{ url_for('student_detail', roll_number=student.roll_number) }}">Back</a>
+    </form>
+  </div>
+{% endblock %}

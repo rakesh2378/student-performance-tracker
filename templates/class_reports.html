@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <h2 style="margin-top:0">Class Reports</h2>
+    <form method="get">
+      <div class="field">
+        <label>Subject</label>
+        <input name="subject" value="{{ subject }}">
+      </div>
+      <button class="btn" type="submit">Run</button>
+    </form>
+
+    {% if subject %}
+      <h3>Subject: {{ subject }}</h3>
+      <p>Class Average: <strong>{{ avg if avg is not none else "—" }}</strong></p>
+      {% if topper %}
+        <p>Topper: <strong>{{ topper[0] }}</strong> ({{ topper[1] }}) - {{ topper[2] }}</p>
+      {% else %}
+        <p>No scores recorded yet.</p>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <h2 style="margin-top:0">{{ student.name }} <small style="opacity:.7;">({{ student.roll_number }})</small></h2>
+      <a class="btn" href="{{ url_for('add_grade', roll_number=student.roll_number) }}">Add Grade</a>
+    </div>
+
+    {% if not student.grades %}
+      <p>No grades yet.</p>
+    {% else %}
+      <table>
+        <thead><tr><th>Subject</th><th>Score</th></tr></thead>
+        <tbody>
+          {% for sub, sc in student.grades.items() %}
+            <tr><td>{{ sub }}</td><td>{{ sc }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    <p style="margin-top:1rem;">Average: <strong>{{ avg if avg is not none else "—" }}</strong></p>
+    <a class="btn ghost" href="{{ url_for('index') }}">Back to list</a>
+  </div>
+{% endblock %}
